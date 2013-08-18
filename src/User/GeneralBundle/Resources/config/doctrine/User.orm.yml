@@ -1,0 +1,90 @@
+User\GeneralBundle\Entity\User:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        uid:
+            type: string
+            length: 255
+        firstName:
+            type: string
+            length: 255
+            column: first_name
+        lastName:
+            type: string
+            length: 255
+            column: last_name
+        nick:
+            type: string
+            length: 255
+            nullable: true
+        gender:
+            type: integer 
+            length: 255
+        email:
+            type: string
+            length: 255
+        box:
+            type: string
+            length: 255
+        login:
+            type: string
+            length: 255
+        link:
+            type: string
+            length: 255
+        refType:
+            type: string
+            length: 255
+            column: ref_type
+            nullable: true
+        refId:
+            type: integer
+            column: ref_id
+            nullable: true
+        countryId:
+            type: integer
+            column: country_id
+            nullable: true
+        countryName:
+            type: string
+            length: 255
+            column: country_name
+            nullable: true
+        regionId:
+            type: integer
+            column: region_id
+            nullable: true
+        regionName:
+            type: string
+            length: 255
+            column: region_name
+            nullable: true
+        cityId:
+            type: integer
+            column: city_id
+            nullable: true
+        cityName:
+            type: string
+            length: 255
+            column: city_name
+            nullable: true
+        birthday:
+            type: datetime
+            nullable: true
+        createdAt:
+            type: datetime
+            column: created_at
+        balance:
+            type: integer
+    lifecycleCallbacks: 
+        prePersist: [ processPrePersist ]
+        postPersist: [ processPostPersist ]
+        postUpdate: [ processPostUpdate ]
+    uniqueConstraints:
+        uid_idx:
+            columns: uid 

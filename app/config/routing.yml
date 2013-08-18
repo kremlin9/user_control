@@ -1,0 +1,4 @@
+user_general:
+    resource: "@UserGeneralBundle/Resources/config/routing.yml"
+    prefix:   /
+

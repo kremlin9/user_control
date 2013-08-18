@@ -1,0 +1,11 @@
+registerUser:
+    pattern:  /user/register
+    defaults: { _controller: UserGeneralBundle:Default:registerUser }
+
+getUser:
+    pattern:  /user/{uid}
+    defaults: { _controller: UserGeneralBundle:Default:getUser }
+
+getBalance:
+    pattern:  /user/{uid}/balance/set
+    defaults: { _controller: UserGeneralBundle:Default:changeBalance }
