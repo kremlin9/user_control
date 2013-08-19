@@ -59,7 +59,7 @@ class DefaultController extends Controller {
     }
 
     public function registerUserAction(Request $r) {
-        $user = $this->lookupUserByUid($uid);
+        $user = $this->lookupUserByUid($r->get('uid'));
 
         if ($user) {
             $answer = array( 'error' => 'user exists' );
