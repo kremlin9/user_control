@@ -88,3 +88,5 @@ User\GeneralBundle\Entity\User:
     uniqueConstraints:
         uid_idx:
             columns: uid 
+        created_at:
+            columns: created_at 
