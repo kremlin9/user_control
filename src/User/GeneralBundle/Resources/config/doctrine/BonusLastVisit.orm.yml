@@ -1,0 +1,24 @@
+User\GeneralBundle\Entity\BonusLastVisit:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        uid:
+            type: string
+            length: 255
+        updatedAt:
+            type: datetime
+            column: updated_at
+        additionalInfo:
+            type: string
+            length: 255
+            column: additional_info
+            nullable: true
+    lifecycleCallbacks: {  }
+    uniqueConstraints:
+        uid_idx:
+            columns: uid 

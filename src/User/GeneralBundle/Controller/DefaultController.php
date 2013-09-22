@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 # Entity
 use User\GeneralBundle\Entity\User;
+use User\GeneralBundle\Entity\LastVisit;
+use User\GeneralBundle\Entity\BonusLastVisit;
 
 class DefaultController extends Controller {
 
@@ -169,4 +171,113 @@ class DefaultController extends Controller {
         }
     }
 
+    public function getLastVisitAction(Request $r) {
+        $uid = $r->get('uid');
+
+        $now = new \DateTime('NOW'); 
+        $last_visit = '';
+
+        # Get Last visit time
+        $rep   = $this->getDoctrine()->getRepository('UserGeneralBundle:LastVisit');
+        $visit = $rep->createQueryBuilder('p')
+            ->where('p.uid = :uid')
+            ->setParameters(array(
+                'uid' => $uid
+            ))
+            ->getQuery()
+            ->getResult();
+
+        if (count($visit) > 0) {
+            $visit = $visit[0];
+            $last_visit = $visit->getUpdatedAt();
+
+            $visit->setUpdatedAt( $now );
+
+        } else {
+            $last_visit = new \DateTime("2013-09-19 00:00:00"); 
+
+            $visit = new LastVisit;
+            $visit->setUid($uid);
+            $visit->setUpdatedAt( $now );
+        }
+
+        # Update it
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($visit);
+        $em->flush();
+
+        $answer = array( 'last_visit' => $last_visit );
+        $response = new Response(json_encode($answer));
+        return $response;
+    }
+
+
+    public function getBonusLastVisitAction(Request $r) {
+        $uid = $r->get('uid');
+
+        $last_visit = '';
+
+        # Get Last visit time
+        $rep   = $this->getDoctrine()->getRepository('UserGeneralBundle:BonusLastVisit');
+        $visit = $rep->createQueryBuilder('p')
+            ->where('p.uid = :uid')
+            ->setParameters(array(
+                'uid' => $uid
+            ))
+            ->getQuery()
+            ->getResult();
+
+        if (count($visit) > 0) {
+            $visit = $visit[0];
+            $last_visit = $visit->getUpdatedAt();
+        } else {
+            $last_visit = new \DateTime("2013-09-19 00:00:00"); 
+
+            $visit = new BonusLastVisit;
+            $visit->setUid($uid);
+            $visit->setUpdatedAt( $last_visit );
+        }
+
+        # Update it
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($visit);
+        $em->flush();
+
+        $answer = array( 'last_visit' => $last_visit->format("U") );
+        $response = new Response(json_encode($answer));
+        return $response;
+    }
+
+    public function updateBonusLastVisitAction(Request $r) {
+        $uid = $r->get('uid');
+
+        # Get Last visit time
+        $rep   = $this->getDoctrine()->getRepository('UserGeneralBundle:BonusLastVisit');
+        $visit = $rep->createQueryBuilder('p')
+            ->where('p.uid = :uid')
+            ->setParameters(array(
+                'uid' => $uid
+            ))
+            ->getQuery()
+            ->getResult();
+
+        if (count($visit) > 0) {
+            $now = new \DateTime('NOW'); 
+
+            $visit = $visit[0];
+            $visit->setUpdatedAt( $now );
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($visit);
+            $em->flush();
+
+            $answer = array( 'done' => 'last time updated' );
+            $response = new Response(json_encode($answer));
+            return $response;
+        } else {
+            $answer = array( 'error' => 'user not found' );
+            $response = new Response(json_encode($answer));
+            return $response;
+        }
+    }
 }

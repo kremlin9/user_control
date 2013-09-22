@@ -9,3 +9,17 @@ getUser:
 getBalance:
     pattern:  /user/{uid}/balance/set
     defaults: { _controller: UserGeneralBundle:Default:changeBalance }
+
+getLastVisit:
+    pattern:  /user/{uid}/last_visit
+    defaults: { _controller: UserGeneralBundle:Default:getLastVisit }
+
+# BONUS
+
+bonusGetLastVisit:
+    pattern:  /user/{uid}/bonus/last_visit
+    defaults: { _controller: UserGeneralBundle:Default:getBonusLastVisit }
+
+bonusUpdateLastVisit:
+    pattern:  /user/{uid}/bonus/last_visit/update
+    defaults: { _controller: UserGeneralBundle:Default:updateBonusLastVisit }
