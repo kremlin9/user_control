@@ -20,6 +20,9 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
 
+        "snc/redis-bundle": "dev-master",
+        "predis/predis": "dev-master",
+
         "Beryllium/CacheBundle": "dev-master",
         "jms/serializer-bundle": "dev-master"
     },

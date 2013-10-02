@@ -19,6 +19,7 @@ class AppKernel extends Kernel
 
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Beryllium\CacheBundle\BerylliumCacheBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
 
             new User\GeneralBundle\UserGeneralBundle(),
         );

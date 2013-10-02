@@ -134,6 +134,10 @@ class DefaultController extends Controller {
         $em->persist($user);
         $em->flush();
 
+        // Set user balance
+        $redis = $this->container->get('snc_redis.default');
+        $redis->set('ub_'.$user->getId(), $config['start_bonus']);
+
         $serializer = $this->get('serializer');
         $json = $serializer->serialize($user, 'json');
         $response = new Response($json);
