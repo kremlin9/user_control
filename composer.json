@@ -21,7 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
 
         "snc/redis-bundle": "dev-master",
-        "predis/predis": "dev-master",
+        "predis/predis": "0.8.*",
 
         "Beryllium/CacheBundle": "dev-master",
         "jms/serializer-bundle": "dev-master"
